@@ -33,7 +33,7 @@ class Applikacka(tk.Tk):
         self.cesta = 'C:/Users/jakub.vlasak/Desktop/'
         self.muj_error = 'Hou, hou, cekani na smrt je horsi nez smrt sama.'
 
-        self.muj_bar = ttk.Progressbar(self, orient='horizontal',mode='indeterminate', length=280)
+        self.muj_bar = ttk.Progressbar(self, orient='horizontal',mode='determinate', length=280)
         self.muj_bar.grid(column=0, row=3, columnspan=2, sticky=tk.EW, padx=10)
 
     def button_convert(self):
@@ -42,10 +42,6 @@ class Applikacka(tk.Tk):
                 ('HEIC files', '*.heic'),
                 ('All files', '*.*')
             )
-            # heic_files = [photo for photo in os.listdir() if '.heic' in photo]
-            # print(heic_files)
-            # self.counter = len(heic_files)
-            # print(self.counter)
 
             konvert_value = self.moje_value.get()
 
@@ -54,14 +50,18 @@ class Applikacka(tk.Tk):
             self.counter = 0
             total_images = len(self.heic_files)
 
-            self.muj_bar['maximum'] = total_images
-
             if self.heic_files == '':
                 showerror(title='ERROR', message= self.muj_error + '\nNevlozil si soubor.')
             else:
                 try:
+                    soucet = 0
                     for i, fotka in enumerate(self.heic_files):
-                        self.muj_bar['value'] = i + 1
+                        
+                        if (i < total_images - 1):
+                            self.muj_bar['value'] += int(100/total_images)
+                            soucet += int(100/total_images)
+                        else:
+                            self.muj_bar['value'] += int(100/total_images)
                         self.update_idletasks()
                         temp_img = Image.open(fotka)
                         self.counter += 1
