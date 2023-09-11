@@ -10,7 +10,7 @@ class Applikacka(tk.Tk):
     def __init__(self):
         super().__init__()
         self.heic_files = []
-        self.title("Konvertor Heic to jpg or png")
+        self.title("Konvertor Heic by Kube")
         self.geometry('300x100')
         self.iconbitmap('znak_skoda.ico')
         self.resizable(False, False)
@@ -79,8 +79,6 @@ class Applikacka(tk.Tk):
                     showerror(title='Convert ERROR', message= self.muj_error + '\nAn error occured while trying to ' \
                         'convert the selected images in file ' + str(self.counter) + '.')
 
-    def progress_bar(self):
-        ...
 
 if __name__ == "__main__":
     muj_konvertor = Applikacka()
